@@ -22,7 +22,7 @@ from .coordinator import MeteoHrCoordinator
 async def async_setup_entry(
     hass: HomeAssistant, entry: ConfigEntry, async_add_entities: AddEntitiesCallback
 ) -> None:
-    coordinator: MeteoHrCoordinator = hass.data[DOMAIN][entry.entry_id]
+    coordinator: MeteoHrCoordinator = hass.data[DOMAIN][entry.entry_id]["weather"]
     async_add_entities([MeteoHrWeather(coordinator, entry)])
 
 

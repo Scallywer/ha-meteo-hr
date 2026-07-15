@@ -1,21 +1,37 @@
 """The Meteo.hr weather integration."""
 from __future__ import annotations
 
+import logging
+
 from homeassistant.config_entries import ConfigEntry
 from homeassistant.const import Platform
 from homeassistant.core import HomeAssistant
+from homeassistant.exceptions import ConfigEntryNotReady
 
 from .const import DOMAIN
-from .coordinator import MeteoHrCoordinator
+from .coordinator import MeteoHrCoordinator, ObservationsCoordinator
 
-PLATFORMS = [Platform.WEATHER]
+_LOGGER = logging.getLogger(__name__)
+
+PLATFORMS = [Platform.WEATHER, Platform.SENSOR]
 
 
 async def async_setup_entry(hass: HomeAssistant, entry: ConfigEntry) -> bool:
-    coordinator = MeteoHrCoordinator(hass, entry)
-    await coordinator.async_config_entry_first_refresh()
+    weather_coordinator = MeteoHrCoordinator(hass, entry)
+    await weather_coordinator.async_config_entry_first_refresh()
 
-    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = coordinator
+    observations_coordinator = ObservationsCoordinator(hass, entry)
+    try:
+        await observations_coordinator.async_config_entry_first_refresh()
+    except ConfigEntryNotReady as err:
+        # Observation sensors are independent of the forecast weather entity —
+        # a failure here (e.g. meteo.hr page layout change) shouldn't block it.
+        _LOGGER.warning("Meteo.hr observation sensors unavailable at startup: %s", err)
+
+    hass.data.setdefault(DOMAIN, {})[entry.entry_id] = {
+        "weather": weather_coordinator,
+        "observations": observations_coordinator,
+    }
     await hass.config_entries.async_forward_entry_setups(entry, PLATFORMS)
     return True
 
