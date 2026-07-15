@@ -1,0 +1,23 @@
+name: Feature request
+description: Suggest an idea for this integration
+labels: ["enhancement"]
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: What's the problem or gap this would solve?
+    validations:
+      required: true
+
+  - type: textarea
+    id: proposal
+    attributes:
+      label: What would you like to see instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: data_source
+    attributes:
+      label: Where does the underlying data come from?
+      description: If this needs data meteo.hr doesn't currently expose (e.g. a page URL), link it here

@@ -1,0 +1,48 @@
+name: Bug report
+description: Something isn't working right
+labels: ["bug"]
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Before filing, please check whether meteo.hr itself (https://meteo.hr) is showing the same data — if their site is also wrong/down, it's not a bug here.
+
+  - type: input
+    id: ha_version
+    attributes:
+      label: Home Assistant version
+      placeholder: "2026.7.1"
+    validations:
+      required: true
+
+  - type: input
+    id: integration_version
+    attributes:
+      label: Meteo.hr Weather integration version
+      description: Settings → Devices & Services → Meteo.hr Weather → the version shown, or the HACS entry
+      placeholder: "0.2.1"
+    validations:
+      required: true
+
+  - type: input
+    id: city_station
+    attributes:
+      label: City and/or Station configured
+      description: The values you picked in the config flow dropdowns
+      placeholder: "City: Osijek, Station: Osijek"
+    validations:
+      required: true
+
+  - type: textarea
+    id: what_happened
+    attributes:
+      label: What happened, and what did you expect instead?
+    validations:
+      required: true
+
+  - type: textarea
+    id: logs
+    attributes:
+      label: Relevant logs
+      description: Settings → System → Logs, filtered to "meteo_hr" — include any traceback in full
+      render: shell
