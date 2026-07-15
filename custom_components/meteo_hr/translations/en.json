@@ -1,0 +1,16 @@
+{
+  "config": {
+    "step": {
+      "user": {
+        "title": "Meteo.hr Weather",
+        "data": {
+          "name": "Name",
+          "city_code": "City code (e.g. OSIJEK, ZAGREB-MAKSIMIR)"
+        }
+      }
+    },
+    "abort": {
+      "already_configured": "This city is already configured."
+    }
+  }
+}
