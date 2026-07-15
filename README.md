@@ -1,6 +1,8 @@
 # Meteo.hr Weather for Home Assistant
 
-[![hacs_badge](https://img.shields.io/badge/HACS-Default-41BDF5.svg)](https://github.com/hacs/integration)
+[![hacs_badge](https://img.shields.io/badge/HACS-Custom-orange.svg)](https://github.com/hacs/integration)
+
+**Status: beta.** Working end-to-end, but new — expect rough edges, and version numbers below 1.0 mean the config/entity shape may still change.
 
 A native Home Assistant `weather` integration backed by [DHMZ](https://meteo.hr) (the Croatian Meteorological and Hydrological Service) forecast data, via the public `meteo.hr` website.
 
@@ -25,8 +27,11 @@ Weather condition text (Croatian) is mapped to Home Assistant's standard conditi
 
 ### HACS (recommended)
 
-1. Search for **Meteo.hr Weather** in HACS and install it.
-2. Restart Home Assistant.
+Not yet in the HACS default store — add it as a custom repository for now:
+
+1. In HACS, go to **Integrations → ⋮ → Custom repositories**, add `https://github.com/Scallywer/ha-meteo-hr` as category **Integration**.
+2. Search for **Meteo.hr Weather** in HACS and install it.
+3. Restart Home Assistant.
 3. Go to **Settings → Devices & Services → Add Integration**, search for **Meteo.hr Weather**.
 
 ### Manual
